@@ -38,7 +38,7 @@ public class Internaute {
       public void setAdressePro(Adresse a) {adressePro = a;}
       public Adresse getAdressePro() {return adressePro;}
       
-      @OneToMany(mappedBy = "pk.internaute")
+      @OneToMany(mappedBy = "pk.internaute" , fetch=FetchType.LAZY)
       private Set<Notation> notations = new HashSet<Notation>();
   	  public Set<Notation> getNotation() {return this.notations;}
   	  public void setNotation(Set<Notation> n) {this.notations = n;}

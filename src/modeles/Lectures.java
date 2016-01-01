@@ -82,5 +82,10 @@ public class Lectures {
 		
 		return criteria.list();
 	}
+	
+	public List<Film> parLot(){
+		Query q = session.createQuery("FROM Film as film");
+		return q.list();
+	}
 
 }

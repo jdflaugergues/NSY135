@@ -7,13 +7,13 @@ public class RoleId implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
+	@ManyToOne (fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_acteur")
 	private Artiste acteur;
 	public Artiste getActeur() {return acteur;}
 	public void setActeur(Artiste a) {this.acteur = a;}
 
-	@ManyToOne
+	@ManyToOne (fetch=FetchType.LAZY)
 	@JoinColumn(name = "id_film")
 	private Film film;
 	public Film getFilm() {return film;}

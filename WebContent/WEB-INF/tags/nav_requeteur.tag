@@ -13,5 +13,6 @@
       <li <c:if test="${subnav.equals('titreCriteria')}">class="active"</c:if>><a href='<c:url value="/requeteur?action=titreCriteria"/>'>Accès Par Titre (Criteria)</a></li>
       <li <c:if test="${subnav.equals('critere')}">class="active"</c:if>><a href='<c:url value="/jsp/requeteur/parCritere.jsp"/>'>Accès Par Critère</a></li>
       <li <c:if test="${subnav.equals('role')}">class="active"</c:if>><a href='<c:url value="/requeteur?action=role"/>'>Accès Par Role</a></li>
+      <li <c:if test="${subnav.equals('lot')}">class="active"</c:if>><a href='<c:url value="/requeteur?action=lot"/>'>Accès Par Lot</a></li>
     </ul>
   </div><!-- Column Left - Nav Bar -->

@@ -95,6 +95,13 @@ public class Requeteur extends HttpServlet {
 					maVue = VUES + "parRole.jsp";
 					break;
 					
+				case "lot": 
+					Lectures requetes6 = new Lectures();
+					List<Film> filmsLot = requetes6.parLot();
+					request.setAttribute("films", filmsLot);
+					maVue = VUES + "parLot.jsp";
+					break;
+					
 				default :
 					throw new Exception("Unknow action.");
 			}
