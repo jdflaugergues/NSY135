@@ -3,6 +3,7 @@ package modeles;
 import java.util.List;
 
 import org.hibernate.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Expression;
@@ -84,7 +85,14 @@ public class Lectures {
 	}
 	
 	public List<Film> parLot(){
-		Query q = session.createQuery("FROM Film as film");
+		
+		// Pour le chargement par lot.
+		//Query q = session.createQuery("FROM Film as film");
+		
+		// S3 avec les fetchs
+		Query q = session.createQuery ("select distinct film from Film as film "
+                + "left join fetch film.roles");
+		
 		return q.list();
 	}
 
