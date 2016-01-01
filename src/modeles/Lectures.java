@@ -41,7 +41,7 @@ public class Lectures {
 	}
 	
 	public List<Film> parTitre(String titre){
-		Query q = session.createQuery("FROM Film as film where film.titre = :titre");
+		Query q = session.createQuery("FROM Film as film join fetch film.realisateur where film.titre = :titre");
 		q.setString("titre", titre);
 		return q.list();
 	}

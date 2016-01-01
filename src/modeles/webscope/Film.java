@@ -21,7 +21,7 @@ public class Film {
 	public void setTitre(String t) {titre= t;}
 	public String getTitre() {return titre;}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn (name="genre")
     private Genre genre;
     public void setGenre(Genre g) {genre = g;}
@@ -32,13 +32,13 @@ public class Film {
 	public void setAnnee(Integer a) {annee = a;}
 	public Integer getAnnee() {return annee;}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn (name="id_realisateur")
 	private Artiste realisateur;
 	public void setRealisateur(Artiste a) {realisateur = a;}
 	public Artiste getRealisateur() {return realisateur;}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn (name="code_pays")
 	private Pays pays;
 	public void setPays(Pays p) {pays = p;}
