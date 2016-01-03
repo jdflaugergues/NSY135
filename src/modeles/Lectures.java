@@ -56,10 +56,11 @@ public class Lectures {
 	@SuppressWarnings("unchecked")
 	public List<Film> parRole(String role){
 		
-		//Query q=session.createQuery("from film left join role ON (film.id=role.id_film) where nom_role= :role");
-		Query query = session.createQuery("FROM Film as film where film.role = :role");
-		query.setString("role", "role");
-		//query.setString("role", role);
+		Query query = session.createQuery("select distinct film " +
+										  "from Film as film " + 
+										  "left join fetch film.roles as role " +
+										  "where film in (select r2.pk.film from Role as r2 where nom= '" + role + "')");
+
 		return query.list();
 	}
 	
