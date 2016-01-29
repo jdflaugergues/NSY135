@@ -26,18 +26,17 @@
               		<tr>
               			<th>Titre</th>
               			<th>Année</th>
-              			<th>Genre</th>
-              			<th>Réalisateur</th>
-              			<th>Pays</th>
+              			<th>Roles</th>
               		</tr>
               	</thead>
 					<c:forEach items="${films}" var="film">
 						<tr>
 							<td><c:out value="${film.titre}" /></td>
 							<td><c:out value="${film.annee}" /></td>
-							<td><c:out value="${film.genre.code}" /></td>
-							<td><c:out value="${film.realisateur.prenom} ${film.realisateur.nom}" /></td>
-							<td><c:out value="${film.pays.nom}" /></td>
+							<td><c:forEach items="${film.roles}" var="role">
+									<c:out value="${role.nom}" /><br>
+								</c:forEach>
+							</td>
 						</tr>
 					</c:forEach>
 				</table>

@@ -1,6 +1,8 @@
 package modeles.webscope;
 import javax.persistence.*;
 
+import org.hibernate.annotations.BatchSize;
+
 @Entity
 public class Role {
 	

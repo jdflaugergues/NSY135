@@ -31,7 +31,7 @@ public class Artiste {
 	public void setAnneeNaissance(Integer a){anneeNaissance = a;}
 	public Integer getAnneeNaissance(){return anneeNaissance;}
 	
-	@OneToMany(mappedBy="realisateur")
+	@OneToMany(mappedBy="realisateur" , fetch=FetchType.LAZY)
 	private Set<Film> filmsRealises = new HashSet<Film>();
 	public void addFilmsRealise(Film f) {
 		f.setRealisateur(this);
@@ -39,11 +39,11 @@ public class Artiste {
 		}
 	public Set<Film> getFilmsRealises() {return filmsRealises;}
 	
-	@ManyToMany(mappedBy= "acteurs")
+	@ManyToMany(mappedBy= "acteurs" , fetch=FetchType.LAZY)
 	Set<Film> filmo;
 	public Set<Film> getFilmo(){return filmo;}
 	
-	@OneToMany(mappedBy = "pk.acteur")
+	@OneToMany(mappedBy = "pk.acteur" , fetch=FetchType.LAZY)
 	private Set<Role> roles = new HashSet<Role>();
 	public Set<Role> getRoles() {return this.roles;}
 	public void setRoles(Set<Role> r) {this.roles = r;}

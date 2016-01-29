@@ -3,6 +3,7 @@ package modeles;
 import java.util.List;
 
 import org.hibernate.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Expression;
@@ -41,7 +42,7 @@ public class Lectures {
 	}
 	
 	public List<Film> parTitre(String titre){
-		Query q = session.createQuery("FROM Film as film where film.titre = :titre");
+		Query q = session.createQuery("FROM Film as film join fetch film.realisateur where film.titre = :titre");
 		q.setString("titre", titre);
 		return q.list();
 	}
@@ -55,10 +56,11 @@ public class Lectures {
 	@SuppressWarnings("unchecked")
 	public List<Film> parRole(String role){
 		
-		//Query q=session.createQuery("from film left join role ON (film.id=role.id_film) where nom_role= :role");
-		Query query = session.createQuery("FROM Film as film where film.role = :role");
-		query.setString("role", "role");
-		//query.setString("role", role);
+		Query query = session.createQuery("select distinct film " +
+										  "from Film as film " + 
+										  "left join fetch film.roles as role " +
+										  "where film in (select r2.pk.film from Role as r2 where nom= '" + role + "')");
+
 		return query.list();
 	}
 	
@@ -81,6 +83,18 @@ public class Lectures {
 		}
 		
 		return criteria.list();
+	}
+	
+	public List<Film> parLot(){
+		
+		// Pour le chargement par lot.
+		//Query q = session.createQuery("FROM Film as film");
+		
+		// S3 avec les fetchs
+		Query q = session.createQuery ("select distinct film from Film as film "
+                + "left join fetch film.roles");
+		
+		return q.list();
 	}
 
 }

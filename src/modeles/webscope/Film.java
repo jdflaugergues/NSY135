@@ -5,6 +5,10 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 @Entity
 @Table(name = "film")
 public class Film {
@@ -21,7 +25,7 @@ public class Film {
 	public void setTitre(String t) {titre= t;}
 	public String getTitre() {return titre;}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn (name="genre")
     private Genre genre;
     public void setGenre(Genre g) {genre = g;}
@@ -32,30 +36,32 @@ public class Film {
 	public void setAnnee(Integer a) {annee = a;}
 	public Integer getAnnee() {return annee;}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn (name="id_realisateur")
 	private Artiste realisateur;
 	public void setRealisateur(Artiste a) {realisateur = a;}
 	public Artiste getRealisateur() {return realisateur;}
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn (name="code_pays")
 	private Pays pays;
 	public void setPays(Pays p) {pays = p;}
 	public Pays getPays() {return pays;}
 
-	@ManyToMany()
+	
+	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name = "Role", joinColumns = @JoinColumn(name = "id_film"),
 				inverseJoinColumns = @JoinColumn(name = "id_acteur"))
 	Set<Artiste> acteurs = new HashSet<Artiste>();
 	public Set<Artiste> getActeurs() {return acteurs;}
 	
-	@OneToMany(mappedBy = "pk.film")
+	@OneToMany(mappedBy = "pk.film" , fetch=FetchType.LAZY)
+	@BatchSize(size=10)
 	private Set<Role> roles = new HashSet<Role>();
 	public Set<Role> getRoles() {return this.roles;}
 	public void setRoles(Set<Role> r) {this.roles = r;}
 	
-	@OneToMany(mappedBy = "pk.film")
+	@OneToMany(mappedBy = "pk.film" , fetch=FetchType.LAZY)
 	private Set<Notation> notations = new HashSet<Notation>();
 	public Set<Notation> getNotations() {return this.notations;}
 	public void setNotations(Set<Notation> n) {this.notations = n;}
