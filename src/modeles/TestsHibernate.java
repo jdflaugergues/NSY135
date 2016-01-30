@@ -13,6 +13,7 @@ import modeles.webscope.Reportage;
 import modeles.webscope.Artiste;
 import modeles.webscope.Film;
 import modeles.webscope.FilmV;
+import modeles.webscope.Genre;
 import modeles.webscope.Internaute;
 import modeles.webscope.Role;
 import modeles.webscope.Video;
@@ -101,9 +102,18 @@ public class TestsHibernate {
 	}
 	
 	public void insertFilm(Film film, Artiste artiste) {
-        session.beginTransaction();
-        session.save(film);
-        session.save(artiste);
-        session.getTransaction().commit();
-}
+		
+       Transaction tx = null;
+        try {
+        	tx = session.beginTransaction();
+            // Sauvegardons dans la base
+        	session.save(film);
+            session.save(artiste);
+        	tx.commit();
+        } catch (RuntimeException e) {
+        	if (tx != null)
+        		tx.rollback();
+        	throw e; // Gérer le message (log, affichage, etc.)
+        }
+	}
 }

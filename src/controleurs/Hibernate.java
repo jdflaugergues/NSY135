@@ -147,6 +147,25 @@ public class Hibernate extends HttpServlet {
 			        // Alfonso Cuaron a réalisé Gravity
 			        cuaron.addFilmsRealise(gravity);
 					
+			        // Ajout des acteurs
+					Artiste bullock = new Artiste();
+					bullock.setPrenom("Sandra");
+					bullock.setNom("Bullock");
+					
+					Role drRyan = new Role();
+					drRyan.setNom("Docteur Ryan Stone");
+					drRyan.setActeur(bullock);
+					drRyan.setFilm(gravity);
+					
+					Artiste clooney = new Artiste();
+					clooney.setPrenom("Georges");
+					clooney.setNom("Clooney");
+					
+					Role kowalski = new Role();
+					kowalski.setNom("Matt Kowalski");
+					kowalski.setActeur(clooney);
+					kowalski.setFilm(gravity);
+			        
 					tstHiber.insertFilm(gravity,cuaron);
 					
 					request.setAttribute("film", gravity);
