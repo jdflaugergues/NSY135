@@ -1,6 +1,6 @@
 .metadata/
 .settings/
 build/
-RemoteSystemsTempFilesi/
+RemoteSystemsTempFiles/
 *.class
 
